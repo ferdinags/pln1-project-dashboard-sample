@@ -1,0 +1,19 @@
+{
+  "name": "pmo-pln1-dashboard",
+  "version": "1.0.0",
+  "description": "Dashboard Tracking Project PMO - PLN Icon Plus Manajemen Pelayanan PLN 1",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx -y serve . -l 3000",
+    "dev": "npx -y serve . -l 3000"
+  },
+  "keywords": [
+    "pmo",
+    "pln",
+    "icon-plus",
+    "dashboard",
+    "project-tracking"
+  ],
+  "author": "PMO PLN 1",
+  "license": "ISC"
+}

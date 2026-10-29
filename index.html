@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PMO Tracking Dashboard - PLN Icon+ Manajemen Pelayanan PLN 1</title>
+  <meta name="description" content="Dashboard Tracking Proyek PMO Multi-Pelanggan (BAg, UIP2B Jamali, dan Subholding PLN)">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+</head>
+<body>
+
+  <!-- Top Header with Corporate Branding -->
+  <header class="top-header">
+    <div class="header-container">
+      <div class="brand-section">
+        <div class="pln-logo-box" title="PLN Icon Plus">
+          ⚡
+        </div>
+        <div class="brand-titles">
+          <div class="brand-main">
+            PLN ICON PLUS
+            <span class="tag-highlight">MANAJEMEN PELAYANAN PLN 1</span>
+          </div>
+          <div class="brand-sub">
+            Enterprise PMO Multi-Customer Tracking & Cockpit Dashboard System
+          </div>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <div class="system-status-pill">
+          <span class="pulse-dot"></span>
+          <span>Sistem Aktif &bull; <strong id="header-system-time">Kamis, 29 Okt 2026</strong></span>
+        </div>
+
+        <div class="user-profile-badge" title="Profil PMO Aktif">
+          <div class="user-avatar">PMO</div>
+          <div class="user-meta">
+            <span class="user-name">Tim PMO PLN 1</span>
+            <span class="user-role">Lead Administrator</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Application Body -->
+  <main class="app-container">
+
+    <!-- ===================================================================
+         SCREEN 1: MASTER LIST OF ALL PMO PROJECTS (LEVEL UTAMA PMO)
+         =================================================================== -->
+    <div id="screen-master" class="app-screen">
+      <!-- Top Level Navigation Tabs -->
+      <nav class="main-nav-tabs" aria-label="Navigasi Menu Utama">
+        <button class="nav-tab-btn active" data-tab="list" id="nav-btn-master-list">
+          <span>📋</span> Daftar Seluruh Proyek PMO (Pelanggan)
+          <span class="tab-badge" id="nav-badge-master">5</span>
+        </button>
+
+        <button class="nav-tab-btn" data-tab="dashboard" id="nav-btn-master-dashboard">
+          <span>📊</span> Dashboard Portofolio Global
+        </button>
+
+        <button class="nav-tab-btn" data-tab="advisory" id="nav-btn-master-advisory">
+          <span>💡</span> Telaah Alur UX (Diskusi Manajer)
+        </button>
+      </nav>
+
+      <!-- Global PMO Executive KPI Cards -->
+      <section class="kpi-grid" aria-label="Ringkasan Indikator Kinerja Utama PMO PLN 1">
+        <div class="kpi-card blue">
+          <div class="kpi-header">
+            <span class="kpi-title">Total Portofolio Proyek</span>
+            <div class="kpi-icon-wrapper">📁</div>
+          </div>
+          <div class="kpi-body">
+            <div class="kpi-value" id="kpi-global-projects">5</div>
+          </div>
+          <div class="kpi-footer">
+            <span class="kpi-trend positive">✓ BAg, UIP2B, IP, NP, PLN KP</span>
+            <span>Pelanggan Utama</span>
+          </div>
+        </div>
+
+        <div class="kpi-card emerald">
+          <div class="kpi-header">
+            <span class="kpi-title">Total Nilai Kontrak</span>
+            <div class="kpi-icon-wrapper">💰</div>
+          </div>
+          <div class="kpi-body">
+            <div class="kpi-value" id="kpi-global-nilai">Rp 54,0 Miliar</div>
+          </div>
+          <div class="kpi-footer">
+            <span class="kpi-trend positive">📈 Kumulatif Portofolio</span>
+            <span>Kontrak Terdata</span>
+          </div>
+        </div>
+
+        <div class="kpi-card purple">
+          <div class="kpi-header">
+            <span class="kpi-title">Rata-Rata Overall Progress</span>
+            <div class="kpi-icon-wrapper">⚡</div>
+          </div>
+          <div class="kpi-body">
+            <div class="kpi-value" id="kpi-global-progress">74%</div>
+          </div>
+          <div class="kpi-footer">
+            <span class="kpi-trend neutral">Rata-rata 5 Pelanggan</span>
+            <span>Bobot Komposit</span>
+          </div>
+        </div>
+
+        <div class="kpi-card gold">
+          <div class="kpi-header">
+            <span class="kpi-title">Total Item Sub-Tracking</span>
+            <div class="kpi-icon-wrapper">📦</div>
+          </div>
+          <div class="kpi-body">
+            <div class="kpi-value" id="kpi-global-subitems">4.719</div>
+          </div>
+          <div class="kpi-footer">
+            <span class="kpi-trend positive">4.685 UIP2B + 16 BAg + Lainnya</span>
+            <span>Sub-pekerjaan</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB SECTION: MASTER LIST -->
+      <section id="sec-master-list">
+        <!-- Toolbar Filters for Master List -->
+        <div class="toolbar-section">
+          <div class="toolbar-row">
+            <div class="search-box-wrapper">
+              <span class="search-icon">🔍</span>
+              <input
+                type="text"
+                id="master-search-input"
+                class="search-input"
+                placeholder="Cari pelanggan (BAg, UIP2B Jamali...), lingkup pekerjaan, atau PIC..."
+              >
+            </div>
+
+            <div class="filter-group">
+              <select id="master-filter-status" class="filter-select">
+                <option value="ALL">Semua Status Proyek</option>
+                <option value="On Progress">On Progress</option>
+                <option value="Go Live">Go Live</option>
+              </select>
+            </div>
+
+            <div style="margin-left: auto; display: flex; align-items: center; gap: 0.75rem;">
+              <span style="font-size: 0.8125rem; font-weight: 700; color: var(--pln-blue-700);">
+                💡 Klik tombol <strong>Buka Dashboard</strong> pada baris pelanggan untuk melihat dashboard spesifiknya
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Master Project Table -->
+        <div class="table-card">
+          <div class="table-header-meta">
+            <div class="table-title">
+              <span>Daftar Proyek Portofolio PMO PLN 1 (Berdasarkan Pelanggan)</span>
+              <span class="table-badge-counter" id="master-filtered-count">5 Proyek Pelanggan</span>
+            </div>
+          </div>
+
+          <div class="table-responsive-wrapper">
+            <table class="pmo-table">
+              <thead>
+                <tr>
+                  <th style="width: 45px; text-align: center;">No</th>
+                  <th>Nama Pelanggan</th>
+                  <th>Nama Pekerjaan (Lingkup Proyek)</th>
+                  <th>PMO (PLN 1)</th>
+                  <th>Nilai / Volume Kontrak</th>
+                  <th>Status</th>
+                  <th>Target</th>
+                  <th style="min-width: 140px;">Overall Progress (%)</th>
+                  <th style="text-align: center; width: 150px;">Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="master-project-tbody">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB SECTION: GLOBAL DASHBOARD -->
+      <section id="sec-global-dashboard" style="display: none;">
+        <div class="detail-grid-2col">
+          <div class="detail-card-panel">
+            <div class="panel-header">
+              <span>📊 Distribusi Volume Item per Pelanggan</span>
+            </div>
+            <div id="global-donut-projects" style="min-height: 240px; display: flex; align-items: center; justify-content: center;"></div>
+          </div>
+
+          <div class="detail-card-panel">
+            <div class="panel-header">
+              <span>⚡ Perbandingan Progress per Pelanggan</span>
+            </div>
+            <div id="global-hbar-progress" style="padding-top: 0.5rem;"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB SECTION: ADVISORY DISCUSSION -->
+      <section id="sec-advisory" style="display: none;">
+        <div class="advisory-banner">
+          <div class="advisory-title">
+            <span>💡</span> Solusi Arsitektur UX: Multi-Customer Dashboard & Drilldown
+          </div>
+          <div class="advisory-desc">
+            Sesuai penjelasan Anda: <em>"List project ketika di klik detail maka akan menampilkan dashboardnya, seperti Pelanggan BAg dan UIP2B."</em>
+            <br><br>
+            Setiap pelanggan memiliki karakteristik proyek yang berbeda:
+            <ul style="margin: 0.5rem 0 0 1.5rem; line-height: 1.6;">
+              <li><strong>Pelanggan BAg (PT Pelayaran Bahtera Adhiguna):</strong> Proyek pengembangan aplikasi korporat/software (ERP FM & CRM), sehingga dashboardnya melacak <em>16 Sub-Pekerjaan CR, Blueprint, UAT, EUT, Deploy, Go-Live, BASTP, dan Penagihan</em>.</li>
+              <li><strong>Pelanggan UIP2B JAMALI:</strong> Proyek penyediaan layanan jaringan telekomunikasi & SCADA, sehingga dashboardnya melacak <em>4.685 Permohonan Layanan, Mutasi (Aktivasi vs Change Tariff), Dark Fiber, Clear Channel, SBU Wilayah, dan Aging PA</em>.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ===================================================================
+         SCREEN 2: DEDICATED DASHBOARD - PELANGGAN PT PELAYARAN BAHTERA ADHIGUNA (BAg)
+         (Menampilkan 16 Sub-Pekerjaan Aplikasi Korporat, ERP FM & CRM)
+         =================================================================== -->
+    <div id="screen-customer-bag" class="app-screen" style="display: none;">
+      <!-- Breadcrumb & Back Navigation Bar -->
+      <div class="customer-cockpit-bar">
+        <div class="breadcrumb-trail">
+          <button class="btn-back-master btn-back-to-master">
+            <span>←</span> Kembali ke Daftar Proyek
+          </button>
+          <span style="color: var(--text-dim);">&bull;</span>
+          <span style="font-weight: 700; color: var(--pln-blue-800);">PT Pelayaran Bahtera Adhiguna (BAg)</span>
+          <span class="subholding-tag">Software / Digital Application</span>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
+          <label style="font-size: 0.8125rem; font-weight: 600; color: var(--text-muted);" for="quick-customer-dropdown">
+            Pindah Pelanggan:
+          </label>
+          <select id="quick-customer-dropdown" class="quick-customer-select">
+            <option value="MASTER">← Menu Daftar Proyek Utama</option>
+            <option value="PRJ-BAG" selected>PT Pelayaran Bahtera Adhiguna (BAg)</option>
+            <option value="PRJ-UIP2B">PT PLN (Persero) UIP2B JAMALI</option>
+            <option value="PRJ-IP">PT PLN Indonesia Power (IP)</option>
+            <option value="PRJ-NP">PT PLN Nusantara Power (NP)</option>
+            <option value="PRJ-KP">PT PLN (Persero) Kantor Pusat</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- BAg Hero Banner -->
+      <div class="customer-hero-card">
+        <div class="customer-hero-content">
+          <div>
+            <div style="display: flex; gap: 0.5rem; align-items: center; margin-bottom: 0.4rem;">
+              <span class="subholding-tag" style="background: rgba(255,255,255,0.2); color: #FFFFFF; border: none;">SUBHOLDING BAg</span>
+              <span style="color: #93C5FD; font-size: 0.8125rem;">Kontrak No: 1403.Pj/BP.302 &bull; 1245.Pj/HKM.02.01</span>
+            </div>
+            <h1 class="customer-hero-title">
+              Digitalisasi Proses Bisnis pada Aplikasi Korporat PT BAg (Tahap 1 & 2)
+            </h1>
+            <p class="customer-hero-desc">
+              Pengembangan 16 Change Request (CR) modul ERP FM, CRM, Odoo, Bank Rekon, Vendor Invoicing Portal (VIP), dan eSPPD.
+            </p>
+          </div>
+          <div style="text-align: right;">
+            <div style="font-size: 0.75rem; color: #93C5FD; text-transform: uppercase; font-weight: 700;">Nilai Kontrak Total</div>
+            <div style="font-size: 1.75rem; font-weight: 800; color: #FFC72C;">Rp 8.043.437.498</div>
+            <div style="font-size: 0.78rem; color: #E2E8F0; margin-top: 0.2rem;">Target: 30 Desember 2026 &bull; PMO: Sarah & Budi Santoso</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BAg 5 KPI Stat Cards -->
+      <section class="kpi-grid">
+        <div class="kpi-card blue">
+          <div class="kpi-header">
+            <span class="kpi-title">Total Sub-Pekerjaan (CR)</span>
+            <div class="kpi-icon-wrapper">📁</div>
+          </div>
+          <div class="kpi-body">
+            <div class="kpi-value" id="bag-kpi-total-cr">16</div>
+          </div>
+          <div class="kpi-footer">
+            <span class="kpi-trend positive">Tahap 1 & Tahap 2</span>
+            <span>Semua Modul</span>
+          </div>
+        </div>
+
+        <div class="kpi-card emerald">
+          <div class="kpi-header">
+            <span class="kpi-title">Realisasi Go-Live</span>
+            <div class="kpi-icon-wrapper">🚀</div>
+          </div>
+          <div class="kpi-body">
+            <div class="kpi-value" id="bag-kpi-golive">10 / 16</div>
+          </div>
+          <div class="kpi-footer">
+            <span class="kpi-trend positive">62.5% CR Go Live</span>
+            <span>Live Operation</span>
+          </div>
+        </div>
+
+        <div class="kpi-card gold">
+          <div class="kpi-header">
+            <span class="kpi-title">Kesiapan Penagihan</span>
+            <div class="kpi-icon-wrapper">🧾</div>
+          </div>
+          <div class="kpi-body">
+            <div class="kpi-value" id="bag-kpi-invoice">1</div>
+          </div>
+          <div class="kpi-footer">
+            <span class="kpi-trend positive">CR Laporan BBM Selesai</span>
+            <span>Closing SID</span>
+          </div>
+        </div>
+
+        <div class="kpi-card rose">
+          <div class="kpi-header">
+            <span class="kpi-title">Kendala / Butuh Tindakan</span>
+            <div class="kpi-icon-wrapper">⚠️</div>
+          </div>
+          <div class="kpi-body">
+            <div class="kpi-value" id="bag-kpi-issues">3</div>
+          </div>
+          <div class="kpi-footer">
+            <span class="kpi-trend warning">Jurnal Odoo & Mandiri API</span>
+            <span>Showing BPO</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- BAg Lifecycle Stepper -->
+      <div class="lifecycle-stepper-box">
+        <div class="stepper-header">
+          <span>Milestone Pipeline Pekerjaan Software BAg</span>
+          <span style="font-size: 0.72rem; color: var(--text-muted);">Kontrak s.d. Closing Invoicing</span>
+        </div>
+        <div id="bag-lifecycle-stepper" style="padding: 0.5rem 0;"></div>
+      </div>
+
+      <!-- BAg Table Toolbar -->
+      <div class="toolbar-section">
+        <div class="toolbar-row">
+          <div class="search-box-wrapper">
+            <span class="search-icon">🔍</span>
+            <input
+              type="text"
+              id="bag-search-input"
+              class="search-input"
+              placeholder="Cari nama CR BAg, kategori modul, atau PIC..."
+            >
+          </div>
+
+          <div class="filter-group">
+            <select id="bag-filter-status" class="filter-select">
+              <option value="ALL">Semua Status</option>
+              <option value="Go Live">Go Live</option>
+              <option value="On Progress">On Progress</option>
+              <option value="Ada Kendala">Ada Kendala</option>
+              <option value="On Hold">On Hold</option>
+              <option value="Proses Invoice">Proses Invoice</option>
+            </select>
+
+            <select id="bag-filter-pic" class="filter-select">
+              <option value="ALL">Semua PMO PIC</option>
+              <option value="Budi Santoso">Budi Santoso</option>
+              <option value="Sarah PMO">Sarah PMO</option>
+              <option value="Rian PMO">Rian PMO</option>
+              <option value="Dimas PMO">Dimas PMO</option>
+              <option value="Hendra PMO">Hendra PMO</option>
+            </select>
+          </div>
+
+          <div style="margin-left: auto;">
+            <span class="table-badge-counter" id="bag-filtered-count">16 Pekerjaan CR</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- BAg 16 CR Master Table -->
+      <div class="table-card">
+        <div class="table-header-meta">
+          <div class="table-title">
+            <span>Daftar 16 Sub-Pekerjaan CR PT Pelayaran Bahtera Adhiguna</span>
+          </div>
+          <div style="font-size: 0.75rem; color: var(--text-muted);">
+            💡 <em>Data langsung bersumber dari <strong>Brief Dashboard Project PLN 1.md</strong></em>
+          </div>
+        </div>
+
+        <div class="table-responsive-wrapper">
+          <table class="pmo-table">
+            <thead>
+              <tr>
+                <th style="width: 40px; text-align: center;">No</th>
+                <th>Nama Pekerjaan (CR)</th>
+                <th>PIC PMO</th>
+                <th>Nilai Kontrak</th>
+                <th>Status</th>
+                <th>Target Waktu</th>
+                <th style="min-width: 140px;">Overall Progress (%)</th>
+                <th>Status BASTP</th>
+                <th style="text-align: center; width: 130px;">Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="bag-table-tbody">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================================================================
+         SCREEN 3: DEDICATED DASHBOARD - PELANGGAN PT PLN (PERSERO) UIP2B JAMALI
+         (Menampilkan 4.685 Permohonan Layanan Telco, SCADA, Dark Fiber, BMS)
+         =================================================================== -->
+    <div id="screen-customer-uip2b" class="app-screen" style="display: none;">
+      <!-- Breadcrumb & Back Navigation Bar -->
+      <div class="customer-cockpit-bar">
+        <div class="breadcrumb-trail">
+          <button class="btn-back-master btn-back-to-master">
+            <span>←</span> Kembali ke Daftar Proyek
+          </button>
+          <span style="color: var(--text-dim);">&bull;</span>
+          <span style="font-weight: 700; color: var(--pln-blue-800);">PT PLN (Persero) UIP2B JAMALI</span>
+          <span class="subholding-tag">Telekomunikasi & Jaringan SCADA</span>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
+          <label style="font-size: 0.8125rem; font-weight: 600; color: var(--text-muted);" for="quick-customer-dropdown-2">
+            Pindah Pelanggan:
+          </label>
+          <select id="quick-customer-dropdown-2" class="quick-customer-select" onchange="App.openCustomerDashboard(this.value)">
+            <option value="PRJ-UIP2B" selected>PT PLN (Persero) UIP2B JAMALI</option>
+            <option value="PRJ-BAG">PT Pelayaran Bahtera Adhiguna (BAg)</option>
+            <option value="PRJ-IP">PT PLN Indonesia Power (IP)</option>
+            <option value="PRJ-NP">PT PLN Nusantara Power (NP)</option>
+            <option value="PRJ-KP">PT PLN (Persero) Kantor Pusat</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- UIP2B Hero Banner -->
+      <div class="customer-hero-card" style="background: linear-gradient(135deg, #06233D 0%, #08436B 60%, #0072BC 100%);">
+        <div class="customer-hero-content">
+          <div>
+            <div style="display: flex; gap: 0.5rem; align-items: center; margin-bottom: 0.4rem;">
+              <span class="subholding-tag" style="background: rgba(255,255,255,0.2); color: #FFFFFF; border: none;">UIP2B JAMALI</span>
+              <span style="color: #93C5FD; font-size: 0.8125rem;">Unit Induk Pusat Pengatur Beban Jawa, Madura dan Bali</span>
+            </div>
+            <h1 class="customer-hero-title">
+              Penyediaan & Pemantauan Layanan Telekomunikasi, SCADA, Dark Fiber & Digital
+            </h1>
+            <p class="customer-hero-desc">
+              Pelacakan 4.685 pesanan layanan telekomunikasi, mutasi aktivasi / change tariff, jaringan SCADA proteksi, dark fiber, metronet, dan battery monitoring system di 5 SBU wilayah kerja.
+            </p>
+          </div>
+          <div style="text-align: right;">
+            <div style="font-size: 0.75rem; color: #93C5FD; text-transform: uppercase; font-weight: 700;">Total Permohonan Terdata</div>
+            <div style="font-size: 1.75rem; font-weight: 800; color: #FFC72C;">4.685 Layanan</div>
+            <div style="font-size: 0.78rem; color: #E2E8F0; margin-top: 0.2rem;">Sales: M Riyadi & Wahyu Ari Kusumo &bull; SBU: Manajemen Pelayanan PLN I</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- UIP2B 5 KPI Cards -->
+      <section class="kpi-grid">
+        <div class="kpi-card blue">
+          <div class="kpi-header">
+            <span class="kpi-title">Total Permohonan Layanan</span>
+            <div class="kpi-icon-wrapper">📡</div>
+          </div>
+          <div class="kpi-body">
+            <div class="kpi-value" id="uip2b-kpi-total">4.685</div>
+          </div>
+          <div class="kpi-footer">
+            <span class="kpi-trend positive">100% Tercatat</span>
+            <span>5 SBU Wilayah</span>
+          </div>
+        </div>
+
+        <div class="kpi-card emerald">
+          <div class="kpi-header">
+            <span class="kpi-title">Kesepakatan Diunggah</span>
+            <div class="kpi-icon-wrapper">📜</div>
+          </div>
+          <div class="kpi-body">
+            <div class="kpi-value" id="uip2b-kpi-kesepakatan">2.535</div>
+          </div>
+          <div class="kpi-footer">
+            <span class="kpi-trend positive">54.1% Berlangganan Aktif</span>
+            <span>Status PA</span>
+          </div>
+        </div>
+
+        <div class="kpi-card purple">
+          <div class="kpi-header">
+            <span class="kpi-title">BAI Selesai Diunggah</span>
+            <div class="kpi-icon-wrapper">✅</div>
+          </div>
+          <div class="kpi-body">
+            <div class="kpi-value" id="uip2b-kpi-bai">705</div>
+          </div>
+          <div class="kpi-footer">
+            <span class="kpi-trend positive">15.0% Berita Acara Instalasi</span>
+            <span>Selesai Terpasang</span>
+          </div>
+        </div>
+
+        <div class="kpi-card gold">
+          <div class="kpi-header">
+            <span class="kpi-title">Aktivasi vs Change Tariff</span>
+            <div class="kpi-icon-wrapper">🔄</div>
+          </div>
+          <div class="kpi-body">
+            <div class="kpi-value" id="uip2b-kpi-mutasi" style="font-size: 1.25rem;">2.010 / 2.532</div>
+          </div>
+          <div class="kpi-footer">
+            <span class="kpi-trend neutral">Aktivasi Baru / Ubah Tarif</span>
+            <span>Jenis Mutasi</span>
+          </div>
+        </div>
+
+        <div class="kpi-card rose">
+          <div class="kpi-header">
+            <span class="kpi-title">Rata-Rata Aging PA</span>
+            <div class="kpi-icon-wrapper">⏳</div>
+          </div>
+          <div class="kpi-body">
+            <div class="kpi-value" id="uip2b-kpi-aging">18.4 Bulan</div>
+          </div>
+          <div class="kpi-footer">
+            <span class="kpi-trend warning">Usia Permohonan Aktif</span>
+            <span>Pemantauan SLA</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- UIP2B Charts Grid -->
+      <div class="detail-grid-2col">
+        <div class="detail-card-panel">
+          <div class="panel-header">
+            <span>🌐 Sebaran per SBU Wilayah Terminating</span>
+            <span style="font-size: 0.75rem; color: var(--text-muted);">Total 4.685 Permohonan</span>
+          </div>
+          <div id="uip2b-chart-sbu" style="min-height: 220px; display: flex; align-items: center; justify-content: center;"></div>
+        </div>
+
+        <div class="detail-card-panel">
+          <div class="panel-header">
+            <span>📊 Distribusi Jenis Layanan Terbesar</span>
+            <span style="font-size: 0.75rem; color: var(--text-muted);">Dark Fiber, Clear Channel, SCADA</span>
+          </div>
+          <div id="uip2b-chart-services" style="padding-top: 0.5rem;"></div>
+        </div>
+      </div>
+
+      <!-- UIP2B Filter Toolbar -->
+      <div class="toolbar-section">
+        <div class="toolbar-row">
+          <div class="search-box-wrapper">
+            <span class="search-icon">🔍</span>
+            <input
+              type="text"
+              id="uip2b-search-input"
+              class="search-input"
+              placeholder="Cari ID permohonan, SID, GI/GITET, atau sales..."
+            >
+          </div>
+
+          <div class="filter-group">
+            <select id="uip2b-filter-sbu" class="filter-select">
+              <option value="ALL">Semua SBU Wilayah</option>
+              <option value="JAKARTA & BANTEN">Jakarta & Banten</option>
+              <option value="JAWA BAGIAN TIMUR">Jawa Bagian Timur</option>
+              <option value="JAWA BAGIAN TENGAH">Jawa Bagian Tengah</option>
+              <option value="JAWA BAGIAN BARAT">Jawa Bagian Barat</option>
+              <option value="BALI & NUSA TENGGARA">Bali & Nusa Tenggara</option>
+            </select>
+
+            <select id="uip2b-filter-layanan" class="filter-select">
+              <option value="ALL">Semua Layanan</option>
+              <option value="DARK FIBER">Dark Fiber</option>
+              <option value="CLEAR CHANNEL">Clear Channel</option>
+              <option value="JARINGAN SCADA PLN">Jaringan SCADA PLN</option>
+              <option value="METRONET">Metronet</option>
+              <option value="PRODUK DIGITAL">Produk Digital (BMS)</option>
+              <option value="TELICON / IP TELEPHONY">Telicon</option>
+            </select>
+
+            <select id="uip2b-filter-mutasi" class="filter-select">
+              <option value="ALL">Semua Mutasi</option>
+              <option value="AKTIVASI">Aktivasi</option>
+              <option value="CHANGE TARIFF">Change Tariff</option>
+              <option value="DEAKTIVASI">Deaktivasi</option>
+            </select>
+
+            <select id="uip2b-filter-pa" class="filter-select">
+              <option value="ALL">Semua Status PA</option>
+              <option value="KESEPAKATAN BERLANGGANAN DIUNGGAH">Kesepakatan Diunggah</option>
+              <option value="BAI TELAH DIUNGGAH">BAI Diunggah</option>
+              <option value="WORK ORDER DIDISPOSISIKAN KE MITRA">Disposisi ke Mitra</option>
+              <option value="PERMOHONAN DIAJUKAN">Permohonan Diajukan</option>
+              <option value="PENGISIAN RAB">Pengisian RAB</option>
+              <option value="PERMOHONAN DIBATALKAN - PA">Dibatalkan</option>
+            </select>
+          </div>
+
+          <div style="margin-left: auto;">
+            <span class="table-badge-counter" id="uip2b-filtered-count">Menampilkan 80 Sample UIP2B</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- UIP2B Table -->
+      <div class="table-card">
+        <div class="table-header-meta">
+          <div class="table-title">
+            <span>Rincian Permohonan Layanan UIP2B JAMALI (Sampel Aktif 80 Item dari 4.685)</span>
+          </div>
+          <div style="font-size: 0.75rem; color: var(--text-muted);">
+            💡 <em>Data bersumber langsung dari file <strong>UIP2B JAMALI - SAMPLE.md</strong></em>
+          </div>
+        </div>
+
+        <div class="table-responsive-wrapper">
+          <table class="pmo-table">
+            <thead>
+              <tr>
+                <th>ID Permohonan Produk</th>
+                <th>SID Baru / Lama</th>
+                <th>Jenis Mutasi</th>
+                <th>Layanan & Produk</th>
+                <th>Alamat Terminating (GI / GITET)</th>
+                <th>SBU Terminating</th>
+                <th>Status PA</th>
+                <th>Tanggal Buat</th>
+                <th>Sales PIC</th>
+                <th>Aging (Bln)</th>
+                <th style="text-align: center;">Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="uip2b-table-tbody">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================================================================
+         SCREEN 4: GENERIC CUSTOMER VIEW (PLN IP, PLN NP, PLN PUSAT)
+         =================================================================== -->
+    <div id="screen-customer-generic" class="app-screen" style="display: none;">
+      <div class="customer-cockpit-bar">
+        <div class="breadcrumb-trail">
+          <button class="btn-back-master btn-back-to-master">
+            <span>←</span> Kembali ke Daftar Proyek
+          </button>
+          <span style="color: var(--text-dim);">&bull;</span>
+          <span style="font-weight: 700; color: var(--pln-blue-800);" id="gen-cust-title">Detail Pelanggan</span>
+        </div>
+      </div>
+
+      <div class="customer-hero-card">
+        <div class="customer-hero-content">
+          <div>
+            <h1 class="customer-hero-title" id="gen-cust-title-main">Dashboard Proyek Pelanggan</h1>
+            <p class="customer-hero-desc" id="gen-cust-desc"></p>
+          </div>
+          <div style="text-align: right;">
+            <div style="font-size: 0.75rem; color: #93C5FD; text-transform: uppercase; font-weight: 700;">Nilai Kontrak</div>
+            <div style="font-size: 1.75rem; font-weight: 800; color: #FFC72C;" id="gen-cust-nilai">Rp 0</div>
+            <div style="font-size: 0.78rem; color: #E2E8F0; margin-top: 0.2rem;">
+              Target: <span id="gen-cust-target">-</span> &bull; PMO: <span id="gen-cust-pmo">-</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="detail-card-panel" style="padding: 2rem; text-align: center;">
+        <div style="font-size: 1.25rem; font-weight: 800; color: var(--pln-blue-900); margin-bottom: 0.5rem;">
+          Overall Progress: <span id="gen-cust-progress" style="color: var(--pln-emerald-600);">0%</span>
+        </div>
+        <p style="font-size: 0.85rem; color: var(--text-muted); max-width: 600px; margin: 0 auto 1.5rem;">
+          Proyek ini berjalan sesuai timeline WBS yang disepakati dengan tim teknis dan PIC PMO PLN 1.
+        </p>
+        <div style="font-size: 0.8rem;">
+          Folder Dokumen: <span id="gen-cust-link" style="color: var(--pln-blue-600); font-weight: 600;">-</span>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ===================================================================
+       MODAL: DETAIL & COCKPIT MODAL (Untuk drill-down sub-pekerjaan)
+       =================================================================== -->
+  <div class="modal-backdrop" id="modal-detail-cockpit" role="dialog" aria-modal="true" aria-labelledby="cockpit-title">
+    <div class="modal-cockpit">
+      <div class="modal-header-cockpit">
+        <div class="cockpit-title-section">
+          <div class="cockpit-breadcrumb">
+            <span id="cockpit-subholding-badge" class="subholding-tag">BAg</span>
+            <span id="cockpit-pelanggan">PT Pelayaran Bahtera Adhiguna</span>
+            <span>&bull;</span>
+            <span id="cockpit-id" style="font-family: 'JetBrains Mono', monospace;">PRJ-001</span>
+          </div>
+          <h2 class="cockpit-main-title" id="cockpit-title">Detail Pekerjaan</h2>
+          <div class="cockpit-badge-row">
+            <span id="cockpit-category" class="project-category-tag">Modul</span>
+            <span id="cockpit-status-badge"></span>
+          </div>
+        </div>
+
+        <div class="cockpit-header-actions">
+          <button class="btn-close-modal" aria-label="Tutup Detail Modal">&times;</button>
+        </div>
+      </div>
+
+      <div class="modal-body-cockpit">
+        <div class="cockpit-stat-strip">
+          <div class="cockpit-mini-stat">
+            <div class="cockpit-mini-label">Nilai Pekerjaan</div>
+            <div class="cockpit-mini-val" id="cockpit-stat-nilai" style="color: var(--pln-blue-700);">Rp 0</div>
+            <div class="cockpit-mini-sub">Termasuk PPN</div>
+          </div>
+
+          <div class="cockpit-mini-stat">
+            <div class="cockpit-mini-label">Target / Status</div>
+            <div class="cockpit-mini-val" id="cockpit-stat-target" style="font-size: 1.15rem;">-</div>
+            <div class="cockpit-mini-sub">Batas Deliverables</div>
+          </div>
+
+          <div class="cockpit-mini-stat">
+            <div class="cockpit-mini-label">Overall Progress</div>
+            <div class="cockpit-mini-val" id="cockpit-stat-overall-pct" style="color: var(--pln-emerald-600);">0%</div>
+            <div class="cockpit-mini-sub">Bobot Komposit</div>
+          </div>
+
+          <div class="cockpit-mini-stat">
+            <div class="cockpit-mini-label">Progress Dev & Deliv</div>
+            <div class="cockpit-mini-val" style="font-size: 1.1rem;">
+              <span id="cockpit-stat-dev-pct">0%</span> / <span id="cockpit-stat-deliv-pct">0%</span>
+            </div>
+            <div class="cockpit-mini-sub">Dev / Deliverables</div>
+          </div>
+
+          <div class="cockpit-mini-stat">
+            <div class="cockpit-mini-label">PIC PMO / Sales</div>
+            <div class="cockpit-mini-val" id="cockpit-stat-pic" style="font-size: 1.15rem;">-</div>
+            <div class="cockpit-mini-sub">Person In Charge</div>
+          </div>
+
+          <div class="cockpit-mini-stat">
+            <div class="cockpit-mini-label">Status Penagihan / PA</div>
+            <div class="cockpit-mini-val" id="cockpit-stat-penagihan" style="font-size: 1rem; color: #D97706;">-</div>
+            <div class="cockpit-mini-sub">Komersial & Legal</div>
+          </div>
+        </div>
+
+        <div class="lifecycle-stepper-box">
+          <div class="stepper-header">
+            <span>Alur Tahapan Pekerjaan</span>
+            <span style="font-size: 0.72rem; color: var(--text-muted);">Tahapan Realisasi</span>
+          </div>
+          <div class="stepper-line" id="cockpit-lifecycle-stepper"></div>
+        </div>
+
+        <div class="modal-tabs">
+          <button class="modal-tab-btn active" data-pane="overview">📈 Ringkasan & Status</button>
+          <button class="modal-tab-btn" data-pane="contract">📜 Kontrak & Legal</button>
+          <button class="modal-tab-btn" data-pane="technical">🛠️ Deliverables & BA</button>
+          <button class="modal-tab-btn" data-pane="logs">📅 Riwayat Update Log</button>
+          <button class="modal-tab-btn" data-pane="risks">⚠️ Kendala & Mitigasi</button>
+        </div>
+
+        <div class="modal-pane active" id="pane-cockpit-overview"></div>
+        <div class="modal-pane" id="pane-cockpit-contract"></div>
+        <div class="modal-pane" id="pane-cockpit-technical"></div>
+        <div class="modal-pane" id="pane-cockpit-logs"></div>
+        <div class="modal-pane" id="pane-cockpit-risks"></div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn-outline btn-modal-cancel">Tutup</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================================
+       MODAL: UPDATE SUB-PEKERJAAN PMO
+       =================================================================== -->
+  <div class="modal-backdrop" id="modal-pmo-update" role="dialog" aria-modal="true" aria-labelledby="update-modal-title">
+    <div class="modal-cockpit" style="max-width: 760px;">
+      <div class="modal-header-cockpit">
+        <div>
+          <div style="font-size: 0.75rem; color: #93C5FD;" id="update-modal-customer">PT Pelayaran Bahtera Adhiguna</div>
+          <h2 class="cockpit-main-title" id="update-modal-title" style="font-size: 1.2rem;">
+            Update Progress & Status Pekerjaan (PMO)
+          </h2>
+          <div style="font-size: 0.8rem; color: #E2E8F0;" id="update-modal-project-title"></div>
+        </div>
+        <button class="btn-close-modal" aria-label="Tutup Modal">&times;</button>
+      </div>
+
+      <form id="pmo-update-form">
+        <input type="hidden" id="update-project-id">
+        <div class="modal-body-cockpit">
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label" for="update-dev-progress">Development Progress (%)</label>
+              <div class="range-slider-group">
+                <input type="range" id="update-dev-progress" class="range-slider" min="0" max="100" step="1">
+                <span class="range-display" id="update-dev-display">0%</span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="update-deliv-progress">Deliverables Progress (%)</label>
+              <div class="range-slider-group">
+                <input type="range" id="update-deliv-progress" class="range-slider" min="0" max="100" step="1">
+                <span class="range-display" id="update-deliv-display">0%</span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="update-status-select">Status</label>
+              <select id="update-status-select" class="form-control">
+                <option value="On Progress">On Progress</option>
+                <option value="Go Live">Go Live</option>
+                <option value="Proses Invoice">Proses Invoice</option>
+                <option value="Ada Kendala">Ada Kendala</option>
+                <option value="On Hold">On Hold</option>
+                <option value="Tahap Penawaran">Tahap Penawaran</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="update-penagihan-select">Status Penagihan</label>
+              <select id="update-penagihan-select" class="form-control">
+                <option value="Belum Tersedia">Belum Tersedia</option>
+                <option value="Proses Invoice">Proses Invoice</option>
+                <option value="Menunggu BASTP">Menunggu BASTP</option>
+                <option value="Selesai Ditagihkan">Selesai Ditagihkan</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="update-target-waktu">Target Waktu</label>
+              <input type="text" id="update-target-waktu" class="form-control" placeholder="Contoh: 23 Oktober 2026">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="update-next-action">Langkah Selanjutnya</label>
+              <input type="text" id="update-next-action" class="form-control" placeholder="Tindakan berikutnya...">
+            </div>
+
+            <div class="form-group full-width">
+              <label class="form-label" for="update-kendala">Kendala / Blocker (Bila Ada)</label>
+              <input type="text" id="update-kendala" class="form-control" placeholder="Tuliskan kendala jika ada (atau isi '-')">
+            </div>
+
+            <div class="form-group full-width">
+              <label class="form-label" for="update-new-log">Tambah Catatan Update Status Terkini</label>
+              <textarea id="update-new-log" class="form-control" placeholder="Tuliskan perkembangan terkini proyek..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn-outline btn-modal-cancel">Batal</button>
+          <button type="submit" class="btn-primary">💾 Simpan Perubahan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toast-container" aria-live="polite"></div>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
